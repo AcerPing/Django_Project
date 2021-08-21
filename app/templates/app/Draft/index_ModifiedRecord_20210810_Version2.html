@@ -1,0 +1,57 @@
+{% extends 'app/base.html' %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+      <div class="navbar-brand col-md-3 col-lg-2 me-0 px-3 d-md-block bg-light" >
+        <ul class="nav flex-column">
+          <li class="active nav-link active"><a href="/">帳務總覽</a></li>
+          <li class="active nav-link active"><a href="/settings">設定</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <h1 class="page-header">帳務總覽</h1>
+
+        <div class="row placeholders">
+          <div class="col-xs-8 col-sm-4 placeholder">
+            <h3>收入</h3>
+            <span class="text-muted"><h2>{{ income }}</h2></span>
+          </div>
+          <div class="col-xs-8 col-sm-4 placeholder">
+            <h3>支出</h3>
+            <span class="text-muted"><h2><font color="#DF565C">{{ outcome }}</font></h2></span>
+          </div>
+          <div class="col-xs-8 col-sm-4 placeholder">
+            <h3>存款</h3>
+            <span class="text-muted"><h2><font color="#53DF7D">{{ net }}</font></h2></span>
+          </div>
+        </div>
+        <br>
+        <h3 class="sub-header">歷史記錄</h3>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>日期</th>
+                <th>描述</th>
+                <th>分類</th>
+                <th>金額</th>
+                <th>收/支</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for record in records %}
+            <tr>
+              <td>{{ record.date | date:"Y-m-d" }}</td>
+              <td>{{ record.description }}</td>
+              <td>{{ record.category }}</td>
+              <td>{{ record.cash }}</td>
+              <td>{{ record.balance_type }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+</div>
+{% endblock %}
